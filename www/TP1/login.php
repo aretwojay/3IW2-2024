@@ -1,19 +1,13 @@
 <?php
-
     print_r($_POST);
 
 ?>
 
 <h1>Se connecter</h1>
 
-<ul>
-    <li>Inscription</li>
-    <li>Connexion</li>
-</ul>
-
-<ul>
-    <li>Déconnexion</li>
-</ul>
+<?php 
+    include 'nav.php'
+?>
 
 <div style="background-color: red">
     <ul>
