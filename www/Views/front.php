@@ -7,6 +7,10 @@
 </head>
 <body>
     <h1>Titre du front</h1>
-    <?php include "../Views/".$this->v; ?>
+    <?php 
+        include '../Views/Layout/nav.php';
+        include "../Views/".$this->v; 
+        include '../Views/Common/errors.php'
+    ?>
 </body>
 </html>

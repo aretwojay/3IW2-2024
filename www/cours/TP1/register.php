@@ -16,7 +16,7 @@
                 $_POST['email'],
                 $_POST['password']
             );
-            $createdUser = $user->register();
+            //$createdUser = $user->register();
             print_r($createdUser);
             //if ($createdUser) {
             //    header('Location: ./index.php');
@@ -36,13 +36,13 @@
 
 <?php
     if (isset($_SESSION['errors'])) {
-        echo '<div style="background-color: red">
-            <ul>';
+        echo `<div style="background-color: red">
+            <ul>`;
                 foreach ($_SESSION['errors'] as $error) {
                     echo '<li>' . $error . '</li>';
                 }
-            echo '</ul>
-        </div>';
+            echo `</ul>
+        </div>`;
     }
 ?>
 <form method="POST" action="./register.php">

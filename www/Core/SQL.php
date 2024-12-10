@@ -23,4 +23,31 @@ class SQL
         return $queryPrepared->fetch();
     }
 
+    public function getOneByField(string $table, string $field, string $value): array{
+        $queryPrepared = $this->pdo->prepare("SELECT * FROM ".$table." WHERE ".$field."= :value");
+        $queryPrepared->execute([
+            "value"=>$value
+        ]);
+        if ($queryPrepared->rowCount() === 0){
+            return [];
+        }
+        return $queryPrepared->fetch();
+    }
+
+    public function insert(string $table, array $data): bool{
+
+        $fields = array_keys($data);
+        $fieldsString = implode(", ",$fields);
+        $valuesString = ":".implode(", :",$fields);
+        $query = $this->pdo->prepare("INSERT INTO $table ($fieldsString) VALUES ($valuesString)");
+
+        foreach ($data as $key => $value){
+            $query->bindValue(":".$key, $value);
+        }
+        //var_dump($query);
+        //die();
+        $result = $query->execute();
+        return $result;
+    }
+
 }

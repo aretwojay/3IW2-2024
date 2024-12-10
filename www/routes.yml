@@ -6,14 +6,21 @@
   controller: Page
   action: show
 
-
 /sinscrire:
   controller: User
   action: register
 
+/sinscrire_post:
+  controller: User
+  action: registerPost
+
 /login:
   controller: User
   action: login
+
+/login_post:
+  controller: User
+  action: loginPost
 
 /logout:
   controller: User
