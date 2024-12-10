@@ -1,0 +1,15 @@
+/sinscrire:
+  controller: User
+  action: register
+
+/login:
+  controller: User
+  action: login
+
+/logout:
+  controller: User
+  action: logout
+
+/dashboard:
+  controller: Backoffice
+  action: dashboard

@@ -1,14 +1,14 @@
-version: '3'
+version: "3"
 services:
   web:
     build: site
-    ports :
-     - "80:80"
+    ports:
+      - "80:80"
     volumes:
-     - ./www:/var/www/html/
-     - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
-     - ./server/apache2.conf:/etc/apache2/apache2.conf
-     - ./server/php.ini:/usr/local/etc/php/php.ini
+      - ./www:/var/www/html/
+      - ./server/000-default.conf:/etc/apache2/sites-available/000-default.conf
+      - ./server/apache2.conf:/etc/apache2/apache2.conf
+      - ./server/php.ini:/usr/local/etc/php/php.ini
 
   mariadb:
     image: mariadb
@@ -29,7 +29,7 @@ services:
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: mariadb
-      PMA_USER: esgi
+      PMA_USER: root
       PMA_PASSWORD: esgipwd
     ports:
       - "8080:80"
