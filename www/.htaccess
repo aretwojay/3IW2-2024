@@ -1,6 +1,5 @@
-# Rediriger www vers le domaine de base
-
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
+RewriteEngine on
+RewriteRule ^$ public/ [L]
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule . Public/index.php [L]
