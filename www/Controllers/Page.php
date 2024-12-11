@@ -12,6 +12,7 @@ class Page
         $sql = new SQL();
         //Faire une requete SQL pour récupérer la page
         $result = $sql->getOneById("page", $pageId);
+
         //Créer une vue
         $view = new View("Page/show.php");
         //Envoyer à la vue toutes les données nécessaires

@@ -20,6 +20,8 @@ class User
     public function register(): void
     {
         $view = new View("User/register.php", "front.php");
+        $view->addData("title", "Inscription");
+        $view->addData("description", "Page d'inscription");
     }
 
     public function registerPost(): void
@@ -27,11 +29,13 @@ class User
         $validator = new UserValidator($_POST);
 
         $errors = $validator->validate();
+        // Si il y a des erreurs, on les stocke dans la session et on redirige 
         if (!empty($errors)) {
             $_SESSION['errors'] = $errors;
             header("Location: /sinscrire");
             die();
         }
+        // Si il n'y a pas d'erreurs, on tente de créer un nouvel utilisateur
         try {
             $newUser = $this->user->register(
                 $_POST['firstname'],
@@ -39,9 +43,10 @@ class User
                 $_POST['email'],
                 $_POST['password']
             );
+            // Si l'utilisateur est bien créé, on redirige vers la page de connexion
             if ($newUser instanceof UserModel) {
                 $_SESSION["errors"] = [];
-                header("Location: /");
+                header("Location: /login");
             } else if ($newUser instanceof \Exception) {
                 $_SESSION["errors"] = [$newUser->getMessage()];
                 header("Location: /sinscrire");
@@ -57,16 +62,20 @@ class User
     public function login(): void
     {
         $view = new View("User/login.php", "front.php");
+        $view->addData("title", "Connexion");
+        $view->addData("description", "Page de connexion");
         //echo $view;
     }
 
     public function loginPost(): void
     {
+        // On tente de connecter l'utilisateur
         try {
             $isLogged = $this->user->login(
                 $_POST['email'],
                 $_POST['password']
             );
+            // Si l'utilisateur est connecté, on le redirige vers la page d'accueil
             if ($isLogged)  {
                 header("Location: /");
             } else {

@@ -8,7 +8,22 @@ class SQL
 
     public function __construct(){
         try{
-            $this->pdo = new \PDO("mysql:host=mariadb;dbname=esgi","esgi","esgipwd");
+            $this->pdo = new \PDO("mysql:host=mariadb","esgi","esgipwd");
+
+            $isDatabaseCreated = $this->pdo->query("SHOW DATABASES LIKE 'esgi'")->fetch();
+            // Créer la base de données si elle n'existe pas
+            if (!$isDatabaseCreated) {
+                $sql = file_get_contents("/esgi.sql");
+                $this->pdo->exec($sql);
+            }
+            $this->pdo->exec("USE esgi");
+            $isUserTableExists = $this->pdo->query("SHOW TABLES LIKE 'user'")->fetch();
+
+            if (!$isUserTableExists) {
+                $sql = file_get_contents("/esgi.sql");
+                // Créer la table user si elle n'existe pas
+                $this->pdo->exec($sql);
+            }
         }catch(\Exception $e){
             die("Erreur SQL ".$e->getMessage());
         }

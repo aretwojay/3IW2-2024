@@ -9,12 +9,21 @@ class Main
 {
 
     public function home():void
-    {
-        $pseudo = isset($_SESSION["user"]) ? $_SESSION["user"]["firstname"] : "";
-        $email = isset($_SESSION["user"]) ? $_SESSION["user"]["email"] : "";
+    {        
+        $unserializedUser = isset($_SESSION["user"]) ? unserialize($_SESSION["user"]) : null;
+        // Si l'utilisateur est connecté, on récupère son pseudo et son email
+        if ($unserializedUser instanceof U) {
+            $pseudo = $unserializedUser->getFirstname();
+            $email = $unserializedUser->getEmail();
+        } else {
+            $pseudo = "";
+            $email = "";
+        }
         $view = new View("Main/home.php");
         $view->addData("pseudo", $pseudo);
         $view->addData("email", $email);
+        $view->addData("title", "Accueil");
+        $view->addData("description", "Page d'accueil");
     }
 
 }

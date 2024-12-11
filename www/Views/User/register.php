@@ -1,8 +1,3 @@
-<?php
-    //Le code pour s'inscrire
-    print_r($_SESSION);
-?>  
-
 <h1>S'inscrire</h1>
 
 <form method="POST" action="/sinscrire_post">
